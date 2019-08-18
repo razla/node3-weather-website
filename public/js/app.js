@@ -9,17 +9,16 @@ weather_form.addEventListener('submit', (e) => {
     const location = search.value
 
     message_one.textContent = 'Loading...'
-    mesaage_two.textContent = ''
+    message_two.textContent = ''
     
     fetch('/weather?address=' + location).then((response) => {
-    response.json().then((data) => {
-        message_one.textContent = 'TEST'
-        if (data.error) {
-            message_one.textContent = data.error
-        } else {
-            message_one.textContent = data.location
-            message_two.textContent = data.forecast
-        }
+        response.json().then((data) => {
+            if (data.error) {
+                message_one.textContent = data.error
+            } else {
+                message_one.textContent = data.location
+                message_two.textContent = data.forecast
+            }
+        })
     })
-})
 })
